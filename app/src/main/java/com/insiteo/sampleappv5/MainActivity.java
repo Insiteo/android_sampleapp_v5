@@ -10,6 +10,7 @@ import com.insiteo.sdk_v5.Insiteo;
 import com.insiteo.sdk_v5.authModule.ISError;
 import com.insiteo.sdk_v5.authModule.ISUserSite;
 import com.insiteo.sdk_v5.authModule.OnAuthEventListener;
+import com.insiteo.sdk_v5.packageModule.entities.Site;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,11 +27,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onInitDone(ISError error, ISUserSite suggestedSite) {
-                Log.d("Insiteo", suggestedSite.getId() + " | " + suggestedSite.getSiteId());
+            public void onInitDone(ISError error, Site suggestedSite) {
+                Log.d("Insiteo", suggestedSite.getName() );
                 //suggestedSite.getSites().get(0).getName()
                 tv.setText("cc");
             }
-        }, "", "" /**Config.API_KEY**/);
+        }, ""); //"", "" /**Config.API_KEY**/);
+
+        Insiteo.getInstance().getLocationModule().start(this);
     }
 }
