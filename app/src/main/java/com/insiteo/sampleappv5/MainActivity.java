@@ -1,14 +1,13 @@
 package com.insiteo.sampleappv5;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.insiteo.sdk_v5.Config;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.insiteo.sdk_v5.Insiteo;
 import com.insiteo.sdk_v5.authModule.ISError;
-import com.insiteo.sdk_v5.authModule.ISUserSite;
 import com.insiteo.sdk_v5.authModule.OnAuthEventListener;
 import com.insiteo.sdk_v5.packageModule.entities.Site;
 
