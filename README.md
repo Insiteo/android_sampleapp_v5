@@ -1,1 +1,1 @@
-# android_sampleapp_v5
+# android_tester_v5
