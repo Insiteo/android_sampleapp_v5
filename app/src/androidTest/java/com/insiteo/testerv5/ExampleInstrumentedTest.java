@@ -1,4 +1,4 @@
-package com.insiteo.sampleappv5;
+package com.insiteo.testerv5;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

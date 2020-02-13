@@ -1,22 +1,14 @@
-package com.insiteo.sampleappv5;
+package com.insiteo.testerv5;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.insiteo.sdk_v5.Insiteo;
 import com.insiteo.sdk_v5.UnityPlayerActivity;
 import com.insiteo.sdk_v5.UnityPlayerFragment;
-import com.insiteo.sdk_v5.authModule.ISError;
-import com.insiteo.sdk_v5.authModule.OnAuthEventListener;
-import com.insiteo.sdk_v5.packageModule.entities.Site;
 
 public class MainActivity extends UnityPlayerActivity {
 Button button;
