@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.insiteo.sdk_v5.INSMapFragment">
+
+    <FrameLayout
+        android:id="@+id/fl_forUnity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#03A9F4" />
+
+    <Button
+        android:id="@+id/fl_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="Sample Button"
+        android:visibility="gone" />
+</FrameLayout>
