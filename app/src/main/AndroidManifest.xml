@@ -13,7 +13,7 @@
             android:name=".MainDrawerActivity"
             android:label="@string/title_activity_main_drawer"
             android:theme="@style/AppTheme.NoActionBar">
-            
+
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -23,5 +23,6 @@
             </intent-filter>
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

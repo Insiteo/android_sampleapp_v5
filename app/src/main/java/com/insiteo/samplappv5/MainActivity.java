@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements UnityMapHandlerListener {
     Button button;
+    Button button2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,17 @@ public class MainActivity extends AppCompatActivity implements UnityMapHandlerLi
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "BOOM!", Toast.LENGTH_SHORT).show();
+                MapManager.getInstance().initApp();
+                button.setVisibility(View.GONE);
+                button2.setVisibility(View.VISIBLE);
+            }
+        });
+
+        button2 = findViewById(R.id.fl_button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MapManager.getInstance().getCountries();
             }
         });
 
@@ -107,5 +119,10 @@ public class MainActivity extends AppCompatActivity implements UnityMapHandlerLi
     @Override
     public void onSpaceReceived(Space space) {
 
+    }
+
+    @Override
+    public void onCountryReceived(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }
