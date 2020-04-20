@@ -1,2 +1,2 @@
-include ':app', ':sdk-v5-debug'
-rootProject.name='SamplAppV5'
+include ':app', ':Insiteo-SDK-3.6.5c', ':sdk-v5'
+project(':sdk-v5').projectDir=new File('../android-sdk-v5/sdk-v5')
