@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SmartInside</string>
+    <string name="title_activity_drawer_main">DrawerMainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">SmartInside</string>
+    <string name="nav_header_subtitle">by Insiteo</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_map">Map</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_login">Login</string>
+    <string name="login">test2@insiteo.com</string>
+    <string name="password">insiteoRules</string>
+</resources>

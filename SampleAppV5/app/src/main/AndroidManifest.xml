@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.insiteo.sampleappv5">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/my_my_ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/my_ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name="com.insiteo.sampleappv5.MainDrawerActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.insiteo.sampleappv5.MainActivity">
+
+        </activity>
+
+
+        <meta-data
+            android:name="com.insiteo.lbs.ApiKey"
+            android:value="2ad95a1d-713d-4100-8d9f-4917f8dc8de7" />
+        <!--meta-data android:name="com.insiteo.lbs.ApiKey" android:value="657108f7-bd82-429e-9677-f91f2cf496f0"/-->
+        <meta-data
+            android:name="com.insiteo.lbs.ISEServerType"
+            android:value="prod" />
+        <meta-data
+            android:name="com.insiteo.lbs.ISERenderMode"
+            android:value="MODE_2D" />
+        <meta-data
+            android:name="com.insiteo.lbs.AnalyticsAutoStart"
+            android:value="true" />
+
+
+    </application>
+
+</manifest>

@@ -1,0 +1,2 @@
+include ':app', ':Insiteo-SdkV5-5.0-release', ':Insiteo-SDK-3.6.5e'
+rootProject.name='SamplAppV5'

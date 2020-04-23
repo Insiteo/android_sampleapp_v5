@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Insiteo-SDK-3.6.5e/Insiteo-SDK-3.6.5e.iml" filepath="$PROJECT_DIR$/Insiteo-SDK-3.6.5e/Insiteo-SDK-3.6.5e.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Insiteo-SdkV5-5.0-release/Insiteo-SdkV5-5.0-release.iml" filepath="$PROJECT_DIR$/Insiteo-SdkV5-5.0-release/Insiteo-SdkV5-5.0-release.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SamplAppV5.iml" filepath="$PROJECT_DIR$/SamplAppV5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
