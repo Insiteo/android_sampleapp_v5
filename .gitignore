@@ -52,13 +52,13 @@ captures/
 
 # IntelliJ
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/assetWizardSettings.xml
-.idea/dictionaries
-.idea/libraries
-.idea/caches
+SampleAppV5/.idea/workspace.xml
+SampleAppV5/.idea/tasks.xml
+SampleAppV5/.idea/gradle.xml
+SampleAppV5/.idea/assetWizardSettings.xml
+SampleAppV5/.idea/dictionaries
+SampleAppV5/.idea/libraries
+SampleAppV5/.idea/caches
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
@@ -94,7 +94,7 @@ Training
 Blog
 About
 Press h to open a hovercard with more details.
-sdk-v5-debug/gradle/
-sdk-v5-debug/.idea/
-sdk-v5-debug/gradlew
-sdk-v5-debug/gradlew.bat
+SampleAppV5/sdk-v5-debug/gradle/
+SampleAppV5/sdk-v5-debug/.idea/
+SampleAppV5/sdk-v5-debug/gradlew
+SampleAppV5/sdk-v5-debug/gradlew.bat
