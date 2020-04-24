@@ -3,17 +3,19 @@ package com.insiteo.sampleappv5;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.insiteo.sdk_v5.INSMain;
-import com.insiteo.sdk_v5.authModule.ISError;
-import com.insiteo.sdk_v5.authModule.OnAuthEventListener;
+import com.insiteo.lbs.Insiteo;
+import com.insiteo.lbs.common.auth.entities.ISUserSite;
+import com.insiteo.lbs.common.init.ISEPackageType;
+import com.insiteo.lbs.common.init.ISPackage;
+import com.insiteo.lbs.common.init.listener.ISIInitListener;
+import com.insiteo.lbs.location.ISILocationListener;
+import com.insiteo.lbs.location.ISLocation;
+import com.insiteo.lbs.location.ISLocationProvider;
 import com.insiteo.sdk_v5.mapModule.INSMapFragment;
 import com.insiteo.sdk_v5.mapModule.INSMapHandlerListener;
 import com.insiteo.sdk_v5.mapModule.INSModelHandlerListener;
@@ -25,75 +27,54 @@ import com.insiteo.sdk_v5.mapModule.entities.Space;
 import com.insiteo.sdk_v5.mapModule.entities.SubArea;
 
 import java.util.List;
+import java.util.Stack;
 
-public class MainActivity extends AppCompatActivity implements INSMapHandlerListener, INSModelHandlerListener {
-    Button button;
-    Button button2;
+public class MainActivity extends AppCompatActivity implements INSMapHandlerListener, INSModelHandlerListener, ISIInitListener, ISILocationListener {
+    INSMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment);
+        setContentView(R.layout.activity_main);
 
-        final TextView tv = findViewById(R.id.tv_siteId);
-        INSMain.getInstance().startAndUpdate(new OnAuthEventListener() {
-            @Override
-            public void onInitUpdate(ISError error, int current, int max) {
+        Insiteo.getInstance().initialize(this, this);
 
-            }
+        if(mapFragment == null)
+            mapFragment = MapManager.getInstance(this).initDisplayComponent();
 
-            @Override
-            public void onInitDone(ISError error, com.insiteo.sdk_v5.packageModule.entities.Site suggestedSite) {
-                Log.d("INSMain", suggestedSite.getName());
-                //suggestedSite.getSites().get(0).getName()
-                tv.setText(suggestedSite.getName());
-            }
-        }, ""); //"", "" /**Config.API_KEY**/);
+        if(!MapManager.isStarted) {
+            MapManager.getInstance(this).initApp();
+        }
 
-        INSMain.getInstance().getLocationModule().start(this);
+        MapManager.getInstance(this).registerMapHandler(this);
+        MapManager.getInstance(this).registerModelHandler(this);
+    }
 
-
-        //setContentView(R.layout.activity_fragment);
-
-        FrameLayout fl = findViewById(R.id.INSMapViewPlaceholder);
-        INSMapFragment frag = MapManager.getInstance(getBaseContext()).initDisplayComponent();
+    @Override
+    protected void onStart() {
+        super.onStart();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(fl.getId(), frag).commit();
 
-        button = findViewById(R.id.fl_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MapManager.getInstance(getBaseContext()).initApp();
-                button.setVisibility(View.GONE);
-                button2.setVisibility(View.VISIBLE);
-            }
-        });
-
-        button2 = findViewById(R.id.fl_button2);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MapManager.getInstance(getBaseContext()).getModelManager().getCountries();
-            }
-        });
-
-        MapManager.getInstance(getBaseContext()).registerMapHandler(this);
-        MapManager.getInstance(getBaseContext()).registerModelHandler(this);
+        if(!mapFragment.isAdded()) {
+            ft.add(R.id.fl_forUnity, mapFragment, "mapViewFragment");
+            ft.addToBackStack("mapViewFragment");
+            ft.commit();
+        }
     }
 
     @Override
     public void onStartLocationEventListener() {
-
+        // Start location
+        startLocation();
     }
 
     @Override
     public void onStopLocationEventListener() {
-
+        stopLocation();
     }
 
     @Override
-    public void onChangeSiteEventListener(String s) {
+    public void onChangeSiteEventListener(String apiKey) {
 
     }
 
@@ -113,32 +94,32 @@ public class MainActivity extends AppCompatActivity implements INSMapHandlerList
     }
 
     @Override
-    public void onSiteReceived(List<Site> list) {
+    public void onSiteReceived(List<Site> siteList) {
 
     }
 
     @Override
-    public void onBuildingsReceived(List<Building> list) {
+    public void onBuildingsReceived(List<Building> buildingList) {
 
     }
 
     @Override
-    public void onFloorsReceived(List<Floor> list) {
+    public void onFloorsReceived(List<Floor> floorList) {
 
     }
 
     @Override
-    public void onSpacesReceived(List<Space> list) {
+    public void onSpacesReceived(List<Space> spaceList) {
 
     }
 
     @Override
-    public void onDeskReceived(List<SubArea> list) {
+    public void onDeskReceived(List<SubArea> deskList) {
 
     }
 
     @Override
-    public void onAssetTypeReceived(String s) {
+    public void onAssetTypeReceived(String assetType) {
 
     }
 
@@ -148,7 +129,117 @@ public class MainActivity extends AppCompatActivity implements INSMapHandlerList
     }
 
     @Override
-    public void onCountryReceived(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    public void onCountryReceived(String countryJson) {
+        Toast.makeText(getApplicationContext(), countryJson, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onInitDone(com.insiteo.lbs.common.ISError isError, ISUserSite isUserSite, boolean b) {
+        Log.d("InsiteoTest", "onInitDone");
+        if(isError == null) {
+            Log.d("InsiteoTest", "onInitDone2");
+            Insiteo.getInstance().startAndUpdate(isUserSite, this);
+            // The suggested site will be started
+        }
+    }
+
+    @Override
+    public void onStartDone(com.insiteo.lbs.common.ISError isError, Stack<ISPackage> packageToUpdate) {
+        Log.d("InsiteoTest", "onStartDone");
+
+        if(isError == null) {
+            if(!packageToUpdate.isEmpty()) {
+                // Package update are available. They will be downloaded.
+                Log.d("InsiteoTest", "onStartDone1");
+            } else {
+                // No package require to be updated. The SDK is no ready to be used.
+                Log.d("InsiteoTest", "onStartDone2");
+            }
+        }
+    }
+
+    @Override
+    public void onPackageUpdateProgress(ISEPackageType isePackageType, boolean b, long l, long l1) {
+        showUpdateUI();
+    }
+
+    @Override
+    public void onDataUpdateDone(com.insiteo.lbs.common.ISError isError) {
+        if(isError == null) {
+            // Packages have been updated. The SDK is no ready to be used.
+            Log.d("InsiteoTest", "onDataUpdateDone !");
+        }
+    }
+
+    private void showUpdateUI() {
+        Log.d("InsiteoTest", "ShowUpdateUI");
+    }
+
+    @Override
+    public Location selectClosestToLocation() {
+        return null;
+    }
+
+    @Override
+    public void onLocationInitDone(com.insiteo.lbs.common.ISError isError) {
+
+    }
+
+    @Override
+    public void onLocationReceived(ISLocation isLocation) {
+        int mapId = isLocation.getMapID();
+        Log.d("MapFragment", "MapId: " + mapId
+                + " | Location x: " + isLocation.getCoord().x
+                + " | y: " + isLocation.getCoord().y
+                + " | accuracy: " + isLocation.getAccuracy()
+                + " | source: " + isLocation.getSource() );
+        double coord_x = isLocation.getCoord().x ;
+        double coord_y = isLocation.getCoord().y ;
+        MapManager.getInstance(getApplicationContext()).sendLocation(coord_x,coord_y, mapId);
+    }
+
+    @Override
+    public void onAzimuthReceived(float v) {
+
+    }
+
+    @Override
+    public void onCompassAccuracyTooLow() {
+
+    }
+
+    @Override
+    public void onNeedToActivateGPS() {
+
+    }
+
+    @Override
+    public void onLocationLost(ISLocation isLocation) {
+
+    }
+
+    @Override
+    public void noRegisteredBeaconDetected() {
+
+    }
+
+    @Override
+    public void onWifiActivationRequired() {
+
+    }
+
+    @Override
+    public void onBleActivationRequired() {
+
+    }
+
+    public void startLocation(){
+        ISLocationProvider.getInstance().start(21, this, Insiteo.getCurrentSite().getMapRootId(), false);
+
+    }
+
+    private void stopLocation(){
+        // Stop location
+        ISLocationProvider.getInstance().stop();
     }
 }

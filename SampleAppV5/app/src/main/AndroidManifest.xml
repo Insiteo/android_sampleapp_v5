@@ -35,7 +35,6 @@
         <meta-data
             android:name="com.insiteo.lbs.ApiKey"
             android:value="2ad95a1d-713d-4100-8d9f-4917f8dc8de7" />
-        <!--meta-data android:name="com.insiteo.lbs.ApiKey" android:value="657108f7-bd82-429e-9677-f91f2cf496f0"/-->
         <meta-data
             android:name="com.insiteo.lbs.ISEServerType"
             android:value="prod" />

@@ -47,6 +47,7 @@ public class LoginFragment extends Fragment {
                 changeFragment();
             }
         });
+
         return root;
     }
 
