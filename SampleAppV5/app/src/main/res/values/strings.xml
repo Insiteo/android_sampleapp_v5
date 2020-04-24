@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">SmartInside</string>
+    <string name="app_name">Insiteo SampleAppV5</string>
     <string name="title_activity_drawer_main">DrawerMainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">SmartInside</string>
+    <string name="nav_header_title">Sample App V5</string>
     <string name="nav_header_subtitle">by Insiteo</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
