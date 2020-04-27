@@ -5,7 +5,7 @@
 Import the library
 
     File -> New --> New Module
-Select Library V5, then, add depencie to the Library
+Select Library V5, then, add dependencies to the Library
 
 	Open Module Settings --> + --> Select the SDK
     
