@@ -1,9 +1,11 @@
 package com.insiteo.sampleappv5.ui.login;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,11 +46,20 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MapManager.getInstance(getContext()).initApp(loginET.getText().toString(), passwordET.getText().toString());
+                hideKeyboard();
                 changeFragment();
             }
         });
 
         return root;
+    }
+
+    private void hideKeyboard() {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void changeFragment() {
